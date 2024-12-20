@@ -24,9 +24,9 @@ Website hosted at [www.crossbar.com](https://www.crossbar.com)
 
 Here are some screenshots of the Crossbar website:
 
-![Homepage](path_to_screenshot1.png)
-![About Page](path_to_screenshot2.png)
-![Contact Page](path_to_screenshot3.png)
+![Homepage](https://github.com/yajatwasisht/CROSSBAR_WEBSITE/blob/5ec0a464ad51d2a0e3167d0e074e351856edde5b/Screenshot%202024-12-20%20165205.png)
+![About Page](https://github.com/yajatwasisht/CROSSBAR_WEBSITE/blob/5ec0a464ad51d2a0e3167d0e074e351856edde5b/Screenshot%202024-12-20%20165228.png)
+![Contact Page](https://github.com/yajatwasisht/CROSSBAR_WEBSITE/blob/5ec0a464ad51d2a0e3167d0e074e351856edde5b/Screenshot%202024-12-20%20165242.png)
 
 *(Replace `path_to_screenshotX.png` with actual image paths)*
 
