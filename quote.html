@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Request A Quote</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .bg-primary {
+            background-color: #007bff !important;
+        }
+
+        .text-primary {
+            color: #007bff !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Quote Section -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">Request A Quote</h5>
+                        <h1 class="mb-0">Need A Free Quote? Please Feel Free to Contact Us</h1>
+                    </div>
+                    <p class="mb-4">We are here to assist you with your inquiries. Contact us for a free quote, and our team will respond within 24 hours.</p>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
+                            <i class="fa fa-phone-alt text-white"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h5 class="mb-2">Call to ask any question</h5>
+                            <h4 class="text-primary mb-0">+012 345 6789</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="bg-primary rounded h-100 d-flex align-items-center p-5">
+                        <form id="quoteForm" onsubmit="sendEmail(); return false;">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <input id="name" type="text" class="form-control bg-light border-0" placeholder="Your Name" required style="height: 55px;">
+                                </div>
+                                <div class="col-12">
+                                    <input id="mobile" type="tel" class="form-control bg-light border-0" placeholder="Your Mobile Number" required style="height: 55px;" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                                <div class="col-12">
+                                    <input id="email" type="email" class="form-control bg-light border-0" placeholder="Your Email" required style="height: 55px;">
+                                </div>
+                                <div class="col-12">
+                                    <select id="service" class="form-select bg-light border-0" required style="height: 55px;">
+                                        <option selected disabled>Select A Service</option>
+                                        <option value="Service 1">Upskilling / Reskilling</option>
+                                        <option value="Service 2">Knowledge Management</option>
+                                        <option value="Service 3">Sourcing & Deployment</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <textarea id="message" class="form-control bg-light border-0" rows="3" placeholder="Message" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-dark w-100 py-3" type="submit">Request A Quote</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        function sendEmail() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const mobile = document.getElementById("mobile").value;
+            const service = document.getElementById("service").value;
+            const message = document.getElementById("message").value;
+
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "info@crossbartalent.com", // Replace with your Elastic Email Username
+                Password: "C792C62B3DD6AF0311FCFFD6981BE049E83E", // Replace with your Elastic Email password
+                Port: 2525,
+                To: "info@crossbartalent.com", // Replace with your recipient email
+                From: "info@crossbartalent.com",
+                Subject: `Quote Request from ${name}`,
+                Body: `
+                    <b>Name:</b> ${name} <br>
+                    <b>Email:</b> ${email} <br>
+                    <b>Mobile Number:</b> ${mobile} <br>
+                    <b>Service:</b> ${service} <br>
+                    <b>Message:</b> ${message}
+                `,
+            }).then((response) => {
+                if (response === "OK") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Email Sent!',
+                        text: 'Your message has been successfully sent. We will contact you soon.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                    });
+                    document.getElementById("quoteForm").reset();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to Send',
+                        text: 'There was an error sending your message. Please try again.',
+                    });
+                }
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occurred',
+                    text: `Error: ${error}`,
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
